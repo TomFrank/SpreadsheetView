@@ -171,8 +171,8 @@ extension SpreadsheetView {
         }
 
         let mergedCells = dataSource.mergedCells(in: self)
-        let mergedCellLayouts: [Location: CellRange] = { () in
-            var layouts = [Location: CellRange]()
+        let mergedCellLayouts: [Location: SpreadsheetViewCellRange] = { () in
+            var layouts = [Location: SpreadsheetViewCellRange]()
             for mergedCell in mergedCells {
                 if (mergedCell.from.column < frozenColumns && mergedCell.to.column >= frozenColumns) ||
                     (mergedCell.from.row < frozenRows && mergedCell.to.row >= frozenRows) {

@@ -151,8 +151,8 @@ public class SpreadsheetView: UIView {
     /// - Note: This method returns the complete list of visible cells displayed by the collection view.
     ///
     /// - Returns: An array of `Cell` objects. If no cells are visible, this method returns an empty array.
-    public var visibleCells: [Cell] {
-        let cells: [Cell] = Array(columnHeaderView.visibleCells) + Array(rowHeaderView.visibleCells)
+    public var visibleCells: [SpreadsheetViewCell] {
+        let cells: [SpreadsheetViewCell] = Array(columnHeaderView.visibleCells) + Array(rowHeaderView.visibleCells)
             + Array(cornerView.visibleCells) + Array(tableView.visibleCells)
         return cells.sorted()
     }
@@ -306,7 +306,7 @@ public class SpreadsheetView: UIView {
     public var frozenRows: Int {
         return layoutProperties.frozenRows
     }
-    public var mergedCells: [CellRange] {
+    public var mergedCells: [SpreadsheetViewCellRange] {
         return layoutProperties.mergedCells
     }
 
@@ -324,9 +324,9 @@ public class SpreadsheetView: UIView {
     let cornerView = ScrollView()
     let tableView = ScrollView()
 
-    private var cellClasses = [String: Cell.Type]()
+    private var cellClasses = [String: SpreadsheetViewCell.Type]()
     private var cellNibs = [String: UINib]()
-    var cellReuseQueues = [String: ReuseQueue<Cell>]()
+    var cellReuseQueues = [String: ReuseQueue<SpreadsheetViewCell>]()
     let blankCellReuseIdentifier = UUID().uuidString
 
     var horizontalGridlineReuseQueue = ReuseQueue<Gridline>()
@@ -409,7 +409,7 @@ public class SpreadsheetView: UIView {
     }
 
     @objc(registerClass:forCellWithReuseIdentifier:)
-    public func register(_ cellClass: Cell.Type, forCellWithReuseIdentifier identifier: String) {
+    public func register(_ cellClass: SpreadsheetViewCell.Type, forCellWithReuseIdentifier identifier: String) {
         cellClasses[identifier] = cellClass
     }
 
@@ -463,14 +463,14 @@ public class SpreadsheetView: UIView {
         setNeedsLayout()
     }
 
-    public func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> Cell {
+    public func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> SpreadsheetViewCell {
         if let reuseQueue = cellReuseQueues[identifier] {
             if let cell = reuseQueue.dequeue() {
                 cell.prepareForReuse()
                 return cell
             }
         } else {
-            let reuseQueue = ReuseQueue<Cell>()
+            let reuseQueue = ReuseQueue<SpreadsheetViewCell>()
             cellReuseQueues[identifier] = reuseQueue
         }
         if identifier == blankCellReuseIdentifier {
@@ -484,7 +484,7 @@ public class SpreadsheetView: UIView {
             return cell
         }
         if let nib = cellNibs[identifier] {
-            if let cell = nib.instantiate(withOwner: nil, options: nil).first as? Cell {
+            if let cell = nib.instantiate(withOwner: nil, options: nil).first as? SpreadsheetViewCell {
                 cell.reuseIdentifier = identifier
                 return cell
             }
@@ -714,7 +714,7 @@ public class SpreadsheetView: UIView {
         }
     }
 
-    public func cellForItem(at indexPath: IndexPath) -> Cell? {
+    public func cellForItem(at indexPath: IndexPath) -> SpreadsheetViewCell? {
         if let cell = tableView.visibleCells.pairs
             .filter({ $0.key.row == indexPath.row && $0.key.column == indexPath.column })
             .map({ return $1 })
@@ -742,8 +742,8 @@ public class SpreadsheetView: UIView {
         return nil
     }
 
-    public func cellsForItem(at indexPath: IndexPath) -> [Cell] {
-        var cells = [Cell]()
+    public func cellsForItem(at indexPath: IndexPath) -> [SpreadsheetViewCell] {
+        var cells = [SpreadsheetViewCell]()
         cells.append(contentsOf:
             tableView.visibleCells.pairs
                 .filter { $0.key.row == indexPath.row && $0.key.column == indexPath.column }
@@ -806,7 +806,7 @@ public class SpreadsheetView: UIView {
         return CGRect(origin: origin, size: size)
     }
 
-    func mergedCell(for indexPath: Location) -> CellRange? {
+    func mergedCell(for indexPath: Location) -> SpreadsheetViewCellRange? {
         return layoutProperties.mergedCellLayouts[indexPath]
     }
 }

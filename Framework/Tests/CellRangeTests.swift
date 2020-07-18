@@ -19,20 +19,20 @@ class CellRangeTests: XCTestCase {
     }
 
     func testCreation() {
-        XCTAssertEqual(CellRange(from: (2, 3), to: (5, 6)),
-                       CellRange(from: Location(row: 2, column: 3), to: Location(row: 5, column: 6)))
+        XCTAssertEqual(SpreadsheetViewCellRange(from: (2, 3), to: (5, 6)),
+                       SpreadsheetViewCellRange(from: Location(row: 2, column: 3), to: Location(row: 5, column: 6)))
     }
 
     func testContains() {
-        let cellRange = CellRange(from: (2, 3), to: (6, 12))
-        XCTAssertTrue(cellRange.contains(CellRange(from: (4, 5), to: (6, 8))))
-        XCTAssertTrue(cellRange.contains(CellRange(from: (2, 3), to: (5, 11))))
-        XCTAssertTrue(cellRange.contains(CellRange(from: (2, 3), to: (6, 12))))
-        XCTAssertFalse(cellRange.contains(CellRange(from: (2, 3), to: (7, 12))))
-        XCTAssertFalse(cellRange.contains(CellRange(from: (2, 3), to: (6, 13))))
-        XCTAssertFalse(cellRange.contains(CellRange(from: (1, 3), to: (6, 8))))
-        XCTAssertFalse(cellRange.contains(CellRange(from: (2, 2), to: (6, 8))))
-        XCTAssertFalse(cellRange.contains(CellRange(from: (1, 2), to: (6, 8))))
+        let cellRange = SpreadsheetViewCellRange(from: (2, 3), to: (6, 12))
+        XCTAssertTrue(cellRange.contains(SpreadsheetViewCellRange(from: (4, 5), to: (6, 8))))
+        XCTAssertTrue(cellRange.contains(SpreadsheetViewCellRange(from: (2, 3), to: (5, 11))))
+        XCTAssertTrue(cellRange.contains(SpreadsheetViewCellRange(from: (2, 3), to: (6, 12))))
+        XCTAssertFalse(cellRange.contains(SpreadsheetViewCellRange(from: (2, 3), to: (7, 12))))
+        XCTAssertFalse(cellRange.contains(SpreadsheetViewCellRange(from: (2, 3), to: (6, 13))))
+        XCTAssertFalse(cellRange.contains(SpreadsheetViewCellRange(from: (1, 3), to: (6, 8))))
+        XCTAssertFalse(cellRange.contains(SpreadsheetViewCellRange(from: (2, 2), to: (6, 8))))
+        XCTAssertFalse(cellRange.contains(SpreadsheetViewCellRange(from: (1, 2), to: (6, 8))))
 
         XCTAssertTrue(cellRange.contains(IndexPath(row: 4, column: 5)))
         XCTAssertTrue(cellRange.contains(IndexPath(row: 2, column: 3)))

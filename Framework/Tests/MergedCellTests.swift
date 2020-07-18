@@ -22,10 +22,10 @@ class MergedCellTests: XCTestCase {
 
     func parameters(frozenColumns: Int = 0, frozenRows: Int = 0, circularScrolling: CircularScrollingConfiguration = CircularScrolling.Configuration.none) -> Parameters {
         let numberOfColumns = 60, numberOfRows = 60
-        var mergedCells = [CellRange]()
+        var mergedCells = [SpreadsheetViewCellRange]()
         for column in (0..<numberOfColumns).filter({ $0 % 2 == 0 }) {
             for row in (0..<numberOfRows).filter({ $0 % 2 == 0 }) {
-                mergedCells.append(CellRange(from: (column, row), to: (column + 1, row + 1)))
+                mergedCells.append(SpreadsheetViewCellRange(from: (column, row), to: (column + 1, row + 1)))
             }
         }
         return Parameters(numberOfColumns: numberOfColumns, numberOfRows: numberOfRows,

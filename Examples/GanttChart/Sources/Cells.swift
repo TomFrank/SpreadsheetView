@@ -9,7 +9,7 @@
 import UIKit
 import SpreadsheetView
 
-class HeaderCell: Cell {
+class HeaderCell: SpreadsheetViewCell {
     let label = UILabel()
 
     override init(frame: CGRect) {
@@ -30,7 +30,7 @@ class HeaderCell: Cell {
     }
 }
 
-class TextCell: Cell {
+class TextCell: SpreadsheetViewCell {
     let label = UILabel()
 
     override init(frame: CGRect) {
@@ -49,7 +49,7 @@ class TextCell: Cell {
     }
 }
 
-class TaskCell: Cell {
+class TaskCell: SpreadsheetViewCell {
     let label = UILabel()
 
     override var frame: CGRect {
@@ -75,7 +75,7 @@ class TaskCell: Cell {
     }
 }
 
-class ChartBarCell: Cell {
+class ChartBarCell: SpreadsheetViewCell {
     let colorBarView = UIView()
     let label = UILabel()
 

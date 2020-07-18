@@ -76,7 +76,7 @@ class ViewController: UIViewController, SpreadsheetViewDataSource, SpreadsheetVi
         return 1
     }
 
-    func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
+    func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> SpreadsheetViewCell? {
         if case 0 = indexPath.row {
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: HeaderCell.self), for: indexPath) as! HeaderCell
             cell.label.text = header[indexPath.column]

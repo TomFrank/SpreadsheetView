@@ -525,15 +525,15 @@ struct LayoutProperties {
     let columnWidthCache: [CGFloat]
     let rowHeightCache: [CGFloat]
 
-    let mergedCells: [CellRange]
-    let mergedCellLayouts: [Location: CellRange]
+    let mergedCells: [SpreadsheetViewCellRange]
+    let mergedCellLayouts: [Location: SpreadsheetViewCellRange]
 
     init(numberOfColumns: Int = 0, numberOfRows: Int = 0,
          frozenColumns: Int = 0, frozenRows: Int = 0,
          frozenColumnWidth: CGFloat = 0, frozenRowHeight: CGFloat = 0,
          columnWidth: CGFloat = 0, rowHeight: CGFloat = 0,
          columnWidthCache: [CGFloat] = [], rowHeightCache: [CGFloat] = [],
-         mergedCells: [CellRange] = [], mergedCellLayouts: [Location: CellRange] = [:]) {
+         mergedCells: [SpreadsheetViewCellRange] = [], mergedCellLayouts: [Location: SpreadsheetViewCellRange] = [:]) {
         self.numberOfColumns = numberOfColumns
         self.numberOfRows = numberOfRows
         self.frozenColumns = frozenColumns

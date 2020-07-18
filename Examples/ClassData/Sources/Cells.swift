@@ -9,7 +9,7 @@
 import UIKit
 import SpreadsheetView
 
-class HeaderCell: Cell {
+class HeaderCell: SpreadsheetViewCell {
     let label = UILabel()
     let sortArrow = UILabel()
 
@@ -47,7 +47,7 @@ class HeaderCell: Cell {
     }
 }
 
-class TextCell: Cell {
+class TextCell: SpreadsheetViewCell {
     let label = UILabel()
 
     override var frame: CGRect {

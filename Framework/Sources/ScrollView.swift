@@ -12,7 +12,7 @@ final class ScrollView: UIScrollView, UIGestureRecognizerDelegate {
     var columnRecords = [CGFloat]()
     var rowRecords = [CGFloat]()
 
-    var visibleCells = ReusableCollection<Cell>()
+    var visibleCells = ReusableCollection<SpreadsheetViewCell>()
     var visibleVerticalGridlines = ReusableCollection<Gridline>()
     var visibleHorizontalGridlines = ReusableCollection<Gridline>()
     var visibleBorders = ReusableCollection<Border>()
@@ -47,7 +47,7 @@ final class ScrollView: UIScrollView, UIGestureRecognizerDelegate {
         for border in visibleBorders {
             border.removeFromSuperview()
         }
-        visibleCells = ReusableCollection<Cell>()
+        visibleCells = ReusableCollection<SpreadsheetViewCell>()
         visibleVerticalGridlines = ReusableCollection<Gridline>()
         visibleHorizontalGridlines = ReusableCollection<Gridline>()
         visibleBorders = ReusableCollection<Border>()

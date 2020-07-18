@@ -90,11 +90,11 @@ class ViewController: UIViewController, SpreadsheetViewDataSource, SpreadsheetVi
         return 1
     }
 
-    func mergedCells(in spreadsheetView: SpreadsheetView) -> [CellRange] {
-        var mergedCells = [CellRange]()
+    func mergedCells(in spreadsheetView: SpreadsheetView) -> [SpreadsheetViewCellRange] {
+        var mergedCells = [SpreadsheetViewCellRange]()
 
         for row in 0..<24 {
-            mergedCells.append(CellRange(from: (60 * row + 1, 0), to: (60 * (row + 1), 0)))
+            mergedCells.append(SpreadsheetViewCellRange(from: (60 * row + 1, 0), to: (60 * (row + 1), 0)))
         }
 
         let seeds = [5, 10, 20, 20, 30, 30, 30, 30, 40, 40, 50, 50, 60, 60, 60, 60, 90, 90, 90, 90, 120, 120, 120]
@@ -103,10 +103,10 @@ class ViewController: UIViewController, SpreadsheetViewDataSource, SpreadsheetVi
             while minutes < 24 * 60 {
                 let duration = seeds[Int(arc4random_uniform(UInt32(seeds.count)))]
                 guard minutes + duration + 1 < numberOfRows else {
-                    mergedCells.append(CellRange(from: (minutes + 1, index + 1), to: (numberOfRows - 1, index + 1)))
+                    mergedCells.append(SpreadsheetViewCellRange(from: (minutes + 1, index + 1), to: (numberOfRows - 1, index + 1)))
                     break
                 }
-                let cellRange = CellRange(from: (minutes + 1, index + 1), to: (minutes + duration + 1, index + 1))
+                let cellRange = SpreadsheetViewCellRange(from: (minutes + 1, index + 1), to: (minutes + duration + 1, index + 1))
                 mergedCells.append(cellRange)
                 slotInfo[IndexPath(row: cellRange.from.row, column: cellRange.from.column)] = (minutes, duration)
                 minutes += duration + 1
@@ -115,7 +115,7 @@ class ViewController: UIViewController, SpreadsheetViewDataSource, SpreadsheetVi
         return mergedCells
     }
 
-    func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
+    func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> SpreadsheetViewCell? {
         if indexPath.column == 0 && indexPath.row == 0 {
             return nil
         }

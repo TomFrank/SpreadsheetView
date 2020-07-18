@@ -52,11 +52,11 @@ class PerformanceTests: XCTestCase {
     }
 
     func testCellRangePerformance1() {
-        var set = Set<CellRange>()
+        var set = Set<SpreadsheetViewCellRange>()
         measure {
             for r in 0..<400 {
                 for c in 0..<400 {
-                    set.insert(CellRange(from: (r, c), to: (r + 1, c + 1)))
+                    set.insert(SpreadsheetViewCellRange(from: (r, c), to: (r + 1, c + 1)))
                 }
             }
         }
@@ -74,11 +74,11 @@ class PerformanceTests: XCTestCase {
     }
 
     func testForLoop() {
-        var mergedCellLayouts = [Location: CellRange]()
-        var mergedCells = [CellRange]()
+        var mergedCellLayouts = [Location: SpreadsheetViewCellRange]()
+        var mergedCells = [SpreadsheetViewCellRange]()
         for r in 0..<100 {
             for c in 0..<100 {
-                mergedCells.append(CellRange(from: (r, c), to: (r + 1, c + 1)))
+                mergedCells.append(SpreadsheetViewCellRange(from: (r, c), to: (r + 1, c + 1)))
             }
         }
         measure {
@@ -93,11 +93,11 @@ class PerformanceTests: XCTestCase {
     }
 
     func testForEach() {
-        var mergedCellLayouts = [Location: CellRange]()
-        var mergedCells = [CellRange]()
+        var mergedCellLayouts = [Location: SpreadsheetViewCellRange]()
+        var mergedCells = [SpreadsheetViewCellRange]()
         for r in 0..<100 {
             for c in 0..<100 {
-                mergedCells.append(CellRange(from: (r, c), to: (r + 1, c + 1)))
+                mergedCells.append(SpreadsheetViewCellRange(from: (r, c), to: (r + 1, c + 1)))
             }
         }
         measure {

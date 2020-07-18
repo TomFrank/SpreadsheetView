@@ -144,22 +144,22 @@ class ViewController: UIViewController, SpreadsheetViewDataSource, SpreadsheetVi
         return 2
     }
 
-    func mergedCells(in spreadsheetView: SpreadsheetView) -> [CellRange] {
-        let titleHeader = [CellRange(from: (0, 0), to: (1, 0)),
-                           CellRange(from: (0, 1), to: (1, 1)),
-                           CellRange(from: (0, 2), to: (1, 2))]
-        let weakHeader = weeks.enumerated().map { (index, _) -> CellRange in
-            return CellRange(from: (0, index * 7 + 3), to: (0, index * 7 + 9))
+    func mergedCells(in spreadsheetView: SpreadsheetView) -> [SpreadsheetViewCellRange] {
+        let titleHeader = [SpreadsheetViewCellRange(from: (0, 0), to: (1, 0)),
+                           SpreadsheetViewCellRange(from: (0, 1), to: (1, 1)),
+                           SpreadsheetViewCellRange(from: (0, 2), to: (1, 2))]
+        let weakHeader = weeks.enumerated().map { (index, _) -> SpreadsheetViewCellRange in
+            return SpreadsheetViewCellRange(from: (0, index * 7 + 3), to: (0, index * 7 + 9))
         }
-        let charts = tasks.enumerated().map { (index, task) -> CellRange in
+        let charts = tasks.enumerated().map { (index, task) -> SpreadsheetViewCellRange in
             let start = Int(task[1])!
             let end = Int(task[2])!
-            return CellRange(from: (index + 2, start + 2), to: (index + 2, start + end + 2))
+            return SpreadsheetViewCellRange(from: (index + 2, start + 2), to: (index + 2, start + end + 2))
         }
         return titleHeader + weakHeader + charts
     }
 
-    func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
+    func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> SpreadsheetViewCell? {
         switch (indexPath.column, indexPath.row) {
         case (0, 0):
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: HeaderCell.self), for: indexPath) as! HeaderCell

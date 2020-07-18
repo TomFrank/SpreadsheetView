@@ -1,5 +1,5 @@
 //
-//  CellRange.swift
+//  SpreadsheetViewCellRange.swift
 //  SpreadsheetView
 //
 //  Created by Kishikawa Katsumi on 3/16/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public final class CellRange {
+public final class SpreadsheetViewCellRange {
     public let from: Location
     public let to: Location
 
@@ -42,13 +42,13 @@ public final class CellRange {
             from.row <= indexPath.row && to.row >= indexPath.row
     }
 
-    public func contains(_ cellRange: CellRange) -> Bool {
+    public func contains(_ cellRange: SpreadsheetViewCellRange) -> Bool {
         return from.column <= cellRange.from.column && to.column >= cellRange.to.column &&
             from.row <= cellRange.from.row && to.row >= cellRange.to.row
     }
 }
 
-extension CellRange: Hashable {
+extension SpreadsheetViewCellRange: Hashable {
     public var hashValue: Int {
         return from.hashValue
     }
@@ -57,12 +57,12 @@ extension CellRange: Hashable {
         hasher.combine(from)
     }
     
-    public static func ==(lhs: CellRange, rhs: CellRange) -> Bool {
+    public static func ==(lhs: SpreadsheetViewCellRange, rhs: SpreadsheetViewCellRange) -> Bool {
         return lhs.from == rhs.from
     }
 }
 
-extension CellRange: CustomStringConvertible, CustomDebugStringConvertible {
+extension SpreadsheetViewCellRange: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         return "R\(from.row)C\(from.column):R\(to.row)C\(to.column)"
     }

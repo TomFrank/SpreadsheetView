@@ -18,9 +18,9 @@ class SpreadsheetViewController: UIViewController, SpreadsheetViewDataSource, Sp
     var widthForColumn: (_ spreadsheetView: SpreadsheetView, _ column: Int) -> CGFloat = { _,_ in return 0 }
     var heightForRow: (_ spreadsheetView: SpreadsheetView, _ column: Int) -> CGFloat = { _,_ in return 0 }
 
-    var cellForItemAt: (_ spreadsheetView: SpreadsheetView, _ indexPath: IndexPath) -> Cell? = { _,_ in return nil }
+    var cellForItemAt: (_ spreadsheetView: SpreadsheetView, _ indexPath: IndexPath) -> SpreadsheetViewCell? = { _,_ in return nil }
 
-    var mergedCells: (_ spreadsheetView: SpreadsheetView) -> [CellRange] = { _ in return [] }
+    var mergedCells: (_ spreadsheetView: SpreadsheetView) -> [SpreadsheetViewCellRange] = { _ in return [] }
 
     var frozenColumns: (_ spreadsheetView: SpreadsheetView) -> Int = { _ in return 0 }
     var frozenRows: (_ spreadsheetView: SpreadsheetView) -> Int = { _ in return 0 }
@@ -67,11 +67,11 @@ class SpreadsheetViewController: UIViewController, SpreadsheetViewDataSource, Sp
         return heightForRow(spreadsheetView, row)
     }
 
-    func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
+    func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> SpreadsheetViewCell? {
         return cellForItemAt(spreadsheetView, indexPath)
     }
 
-    func mergedCells(in spreadsheetView: SpreadsheetView) -> [CellRange] {
+    func mergedCells(in spreadsheetView: SpreadsheetView) -> [SpreadsheetViewCellRange] {
         return mergedCells(spreadsheetView)
     }
 
@@ -124,14 +124,14 @@ struct Parameters {
     var intercellSpacing: CGSize
     var gridStyle: GridStyle
 
-    var cell: (class: Cell.Type, reuseIdentifier: String) = (class: DebugCell.self, reuseIdentifier: "cell")
+    var cell: (class: SpreadsheetViewCell.Type, reuseIdentifier: String) = (class: DebugCell.self, reuseIdentifier: "cell")
 
     var circularScrolling: CircularScrollingConfiguration
 
     let columns: [CGFloat]
     let rows: [CGFloat]
 
-    let mergedCells: [CellRange]
+    let mergedCells: [SpreadsheetViewCellRange]
 
     var columnWidth: CGFloat {
         return columns.reduce(0) { $0 + $1 + intercellSpacing.width } + intercellSpacing.width
@@ -145,7 +145,7 @@ struct Parameters {
          intercellSpacing: CGSize = CGSize(width: 4, height: 4), gridStyle: GridStyle = .solid(width: 2, color: .blue),
          circularScrolling: CircularScrollingConfiguration = CircularScrolling.Configuration.none,
          columns: [CGFloat]? = nil, rows: [CGFloat]? = nil,
-         mergedCells: [CellRange] = []) {
+         mergedCells: [SpreadsheetViewCellRange] = []) {
         if let columns = columns {
             self.numberOfColumns =  columns.count
         } else {
@@ -180,7 +180,7 @@ struct Parameters {
     }
 }
 
-class DebugCell: Cell {
+class DebugCell: SpreadsheetViewCell {
     var label = UILabel()
 
     override var indexPath: IndexPath! {

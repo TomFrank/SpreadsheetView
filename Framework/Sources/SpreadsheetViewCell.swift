@@ -1,5 +1,5 @@
 //
-//  Cell.swift
+//  SpreadsheetViewCell.swift
 //  SpreadsheetView
 //
 //  Created by Kishikawa Katsumi on 3/16/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class Cell: UIView {
+open class SpreadsheetViewCell: UIView {
     public let contentView = UIView()
 
     public var backgroundView: UIView? {
@@ -106,10 +106,10 @@ open class Cell: UIView {
     }
 }
 
-extension Cell: Comparable {
-    public static func <(lhs: Cell, rhs: Cell) -> Bool {
+extension SpreadsheetViewCell: Comparable {
+    public static func <(lhs: SpreadsheetViewCell, rhs: SpreadsheetViewCell) -> Bool {
         return lhs.indexPath < rhs.indexPath
     }
 }
 
-final class BlankCell: Cell {}
+final class BlankCell: SpreadsheetViewCell {}

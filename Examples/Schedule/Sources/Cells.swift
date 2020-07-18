@@ -9,7 +9,7 @@
 import UIKit
 import SpreadsheetView
 
-class DateCell: Cell {
+class DateCell: SpreadsheetViewCell {
     let label = UILabel()
 
     override init(frame: CGRect) {
@@ -28,7 +28,7 @@ class DateCell: Cell {
     }
 }
 
-class DayTitleCell: Cell {
+class DayTitleCell: SpreadsheetViewCell {
     let label = UILabel()
 
     override init(frame: CGRect) {
@@ -47,7 +47,7 @@ class DayTitleCell: Cell {
     }
 }
 
-class TimeTitleCell: Cell {
+class TimeTitleCell: SpreadsheetViewCell {
     let label = UILabel()
 
     override init(frame: CGRect) {
@@ -66,7 +66,7 @@ class TimeTitleCell: Cell {
     }
 }
 
-class TimeCell: Cell {
+class TimeCell: SpreadsheetViewCell {
     let label = UILabel()
 
     override init(frame: CGRect) {
@@ -91,7 +91,7 @@ class TimeCell: Cell {
     }
 }
 
-class ScheduleCell: Cell {
+class ScheduleCell: SpreadsheetViewCell {
     let label = UILabel()
     var color: UIColor = .clear {
         didSet {

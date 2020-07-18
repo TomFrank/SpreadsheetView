@@ -19,7 +19,7 @@ class CellTests: XCTestCase {
     }
     
     func testViewHierarchy() {
-        let cell = Cell()
+        let cell = SpreadsheetViewCell()
         XCTAssertNil(cell.backgroundView)
         XCTAssertNil(cell.selectedBackgroundView)
         XCTAssertEqual(cell.subviews, [cell.contentView])
@@ -54,7 +54,7 @@ class CellTests: XCTestCase {
     }
 
     func testHasBorder() {
-        let cell = Cell()
+        let cell = SpreadsheetViewCell()
         XCTAssertEqual(cell.borders.top, .none)
         XCTAssertEqual(cell.borders.bottom, .none)
         XCTAssertEqual(cell.borders.left, .none)

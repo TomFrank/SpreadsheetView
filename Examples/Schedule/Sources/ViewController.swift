@@ -94,7 +94,7 @@ class ViewController: UIViewController, SpreadsheetViewDataSource, SpreadsheetVi
         return 2
     }
 
-    func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
+    func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> SpreadsheetViewCell? {
         if case (1...(dates.count + 1), 0) = (indexPath.column, indexPath.row) {
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DateCell.self), for: indexPath) as! DateCell
             cell.label.text = dates[indexPath.column - 1]
